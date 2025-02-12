@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKILLUP - Learning Tracker</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: monospace;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .gif-container img {
+            width: 200px;
+        }
+        select, .week-container, .day-container {
+            display: block;
+            margin: 10px auto;
+            background: black;
+            color: lime;
+            border: 1px solid lime;
+            padding: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gif-container">
+            <img src="your-gif-url.gif" alt="Hacker GIF">
+        </div>
+        <h1>SKILLUP - Learning Tracker</h1>
+        <label for="course">Select Course:</label>
+        <select id="course" onchange="showWeeks()">
+            <option value="">-- Select Course --</option>
+            <option value="hacking">Ethical Hacking</option>
+            <option value="programming">Programming</option>
+        </select>
+        
+        <div id="week-container" class="week-container hidden">
+            <label for="week">Select Week:</label>
+            <select id="week" onchange="showDays()">
+                <option value="">-- Select Week --</option>
+                <option value="week1">Week 1</option>
+                <option value="week2">Week 2</option>
+            </select>
+        </div>
+        
+        <div id="day-container" class="day-container hidden">
+            <label for="day">Select Day:</label>
+            <select id="day">
+                <option value="">-- Select Day --</option>
+                <option value="day1">Day 1</option>
+                <option value="day2">Day 2</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        function showWeeks() {
+            document.getElementById('week-container').classList.remove('hidden');
+            document.getElementById('day-container').classList.add('hidden');
+        }
+
+        function showDays() {
+            document.getElementById('day-container').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
