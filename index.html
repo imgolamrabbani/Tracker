@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <!-- For modern browsers -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
     <title>SkillUp</title>
     <style>
         body {
@@ -51,20 +55,21 @@
             display: none;
         }
     </style>
+    
 </head>
 <body>
     <div class="container">
         <div class="gif-container">
             <img src="assets/images/giphy.gif" alt="Hacker GIF">
         </div>
-        <h1>Upgrade Yourself</h1>
+        <h1>Personal Development</h1>
         <label for="course">Select Course:</label>
         <select id="course" onchange="showWeeks()">
             <option value="">-- Select Course --</option>
             <option value="wapt">30-Day Web Application Penetration Testing</option>
         </select>
         
-        <div id="week-container" class="week-container hidden">
+        <div id="week-container" class="hidden">
             <label for="week">Select Week:</label>
             <select id="week" onchange="showDays()">
                 <option value="">-- Select Week --</option>
@@ -76,25 +81,40 @@
             </select>
         </div>
         
-        <div id="day-container" class="day-container hidden">
+        <div id="day-container" class="hidden">
             <label for="day">Select Day:</label>
             <select id="day">
                 <option value="">-- Select Day --</option>
-                <option value="day1">Day 1: Introduction to Cybersecurity, VirtualBox & Kali Linux Basics</option>
-                <option value="day2">Day 2: Linux Essentials – Commands, File System & Permissions</option>
-                <option value="day3">Day 3: Networking Basics – OSI Model, TCP/UDP, Ports & Protocols</option>
-                <option value="day4">Day 4: Wireshark Basics – Capturing & Analyzing Network Traffic</option>
-                <option value="day5">Day 5: Google Dorking & OSINT – Finding Sensitive Data Online</option>
             </select>
         </div>
         
-        <div id="content-container" class="content-container hidden">
+        <div id="content-container" class="hidden">
             <h2>Learning Materials</h2>
             <p id="content"></p>
         </div>
     </div>
 
     <script>
+        const weeks = {
+            'week1': {
+                'day1': "Introduction to Cybersecurity, VirtualBox & Kali Linux Basics.",
+                'day2': "Linux Essentials – Commands, File System & Permissions.",
+                'day3': "Networking Basics – OSI Model, TCP/UDP, Ports & Protocols.",
+                'day4': "Wireshark Basics – Capturing & Analyzing Network Traffic.",
+                'day5': `Google Dorking & OSINT – Finding Sensitive Data Online.<br>
+                        <a href='https://youtu.be/lESeJ3EViCo' target='_blank'>Video 1</a><br>
+                        <a href='https://youtu.be/rTCwJFkuxvI' target='_blank'>Video 2</a><br>
+                        <a href='https://youtu.be/o3XmXbh6Sjg' target='_blank'>Video 3</a>`
+            },
+            'week2': {
+                'day8': "Introduction to Burp Suite – Intercepting & Modifying Requests.",
+                'day9': "Broken Access Control – Understanding & Exploiting Access Flaws.",
+                'day10': "Cryptographic Failures – Weak Encryption & Data Exposure.",
+                'day11': "SQL Injection – Understanding & Exploiting SQLi.",
+                'day12': "SQL Injection Labs – Hands-on Practical Challenges."
+            }
+        };
+        
         function showWeeks() {
             document.getElementById('week-container').classList.remove('hidden');
             document.getElementById('day-container').classList.add('hidden');
@@ -102,23 +122,27 @@
         }
 
         function showDays() {
+            const weekSelected = document.getElementById('week').value;
+            const daySelect = document.getElementById('day');
+            daySelect.innerHTML = '<option value="">-- Select Day --</option>';
+            
+            if (weeks[weekSelected]) {
+                for (const day in weeks[weekSelected]) {
+                    let option = document.createElement('option');
+                    option.value = day;
+                    option.textContent = weeks[weekSelected][day].split(" – ")[0];
+                    daySelect.appendChild(option);
+                }
+            }
+            
             document.getElementById('day-container').classList.remove('hidden');
             document.getElementById('content-container').classList.add('hidden');
         }
 
         document.getElementById('day').addEventListener('change', function() {
-            let content = {
-                'day1': "Introduction to Cybersecurity, VirtualBox & Kali Linux Basics. Learn about Virtual Machines, installing Kali Linux, and basic cybersecurity principles.",
-                'day2': "Linux Essentials – Learn essential Linux commands, file system structure, and permission settings.",
-                'day3': "Networking Basics – OSI Model, TCP/UDP, Ports & Protocols explained with real-world examples.",
-                'day4': "Wireshark Basics – How to capture and analyze network traffic to find vulnerabilities.",
-                'day5': `Google Dorking & OSINT – Learn how to find sensitive information online using search engine queries.<br>
-                        <a href='https://www.youtube.com/watch?v=lESeJ3EViCo&t=117s&pp=ygVAR29vZ2xlIERvcmtpbmcgYW5kIE9TSU5UIOKAkyBGaW5kaW5nIFNlbnNpdGl2ZSBEYXRhIE9ubGluZWNyZWF0ZQ%3D%3D' target='_blank'>Video 1</a><br>
-                        <a href='https://www.youtube.com/watch?v=520omlWAgmY' target='_blank'>Video 2</a><br>
-                        <a href='https://www.bytesnipers.com/en/cybersecurity-blog/google-dorks' target='_blank'>Blog</a>`
-            };
-            let selectedDay = this.value;
-            document.getElementById('content').innerHTML = content[selectedDay] || "No content available.";
+            const weekSelected = document.getElementById('week').value;
+            const selectedDay = this.value;
+            document.getElementById('content').innerHTML = weeks[weekSelected][selectedDay] || "No content available.";
             document.getElementById('content-container').classList.remove('hidden');
         });
     </script>
