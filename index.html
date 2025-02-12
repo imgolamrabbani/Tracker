@@ -6,26 +6,46 @@
     <title>SKILLUP - Learning Tracker</title>
     <style>
         body {
-            background-color: black;
-            color: lime;
-            font-family: monospace;
+            background-color: #0d0d0d;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
         .container {
             max-width: 800px;
-            margin: auto;
+            margin: 50px auto;
             padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00ff00;
         }
         .gif-container img {
             width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ff00;
         }
-        select, .week-container, .day-container {
+        h1 {
+            font-size: 28px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        select {
             display: block;
-            margin: 10px auto;
-            background: black;
-            color: lime;
-            border: 1px solid lime;
-            padding: 5px;
+            margin: 15px auto;
+            background: #0d0d0d;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        select:hover {
+            background: #00ff00;
+            color: #0d0d0d;
         }
         .hidden {
             display: none;
@@ -35,7 +55,7 @@
 <body>
     <div class="container">
         <div class="gif-container">
-            <img src="assets/images/giphy.gif" alt="Hacker GIF">
+            <img src="your-gif-url.gif" alt="Hacker GIF">
         </div>
         <h1>SKILLUP - Learning Tracker</h1>
         <label for="course">Select Course:</label>
