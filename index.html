@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKILLUP - Learning Tracker</title>
+    <title>SkillUp</title>
     <style>
         body {
             background-color: #0d0d0d;
@@ -56,22 +55,24 @@
 <body>
     <div class="container">
         <div class="gif-container">
-            <img src="assets/images/giphy.gif" alt="Hacker GIF">
+            <img src="assets/images/gifphy.gif" alt="Hacker GIF">
         </div>
-        <h1>SKILLUP - Learning Tracker</h1>
+        <h1>Upgrade Yourself</h1>
         <label for="course">Select Course:</label>
         <select id="course" onchange="showWeeks()">
             <option value="">-- Select Course --</option>
-            <option value="hacking">Ethical Hacking</option>
-            <option value="programming">Programming</option>
+            <option value="wapt">30-Day Web Application Penetration Testing</option>
         </select>
         
         <div id="week-container" class="week-container hidden">
             <label for="week">Select Week:</label>
             <select id="week" onchange="showDays()">
                 <option value="">-- Select Week --</option>
-                <option value="week1">Week 1</option>
-                <option value="week2">Week 2</option>
+                <option value="week1">Week 1: Cybersecurity & Networking Fundamentals</option>
+                <option value="week2">Week 2: Web Application Security & Vulnerability Identification</option>
+                <option value="week3">Week 3: OWASP Top 10 Deep Dive</option>
+                <option value="week4">Week 4: Advanced Web Application Exploitation</option>
+                <option value="week5">Week 5: Bug Hunting & Career Boost</option>
             </select>
         </div>
         
@@ -79,9 +80,17 @@
             <label for="day">Select Day:</label>
             <select id="day">
                 <option value="">-- Select Day --</option>
-                <option value="day1">Day 1</option>
-                <option value="day2">Day 2</option>
+                <option value="day1">Day 1: Introduction to Cybersecurity, VirtualBox & Kali Linux Basics</option>
+                <option value="day2">Day 2: Linux Essentials – Commands, File System & Permissions</option>
+                <option value="day3">Day 3: Networking Basics – OSI Model, TCP/UDP, Ports & Protocols</option>
+                <option value="day4">Day 4: Wireshark Basics – Capturing & Analyzing Network Traffic</option>
+                <option value="day5">Day 5: Google Dorking & OSINT – Finding Sensitive Data Online</option>
             </select>
+        </div>
+        
+        <div id="content-container" class="content-container hidden">
+            <h2>Learning Materials</h2>
+            <p id="content"></p>
         </div>
     </div>
 
@@ -89,11 +98,29 @@
         function showWeeks() {
             document.getElementById('week-container').classList.remove('hidden');
             document.getElementById('day-container').classList.add('hidden');
+            document.getElementById('content-container').classList.add('hidden');
         }
 
         function showDays() {
             document.getElementById('day-container').classList.remove('hidden');
+            document.getElementById('content-container').classList.add('hidden');
         }
+
+        document.getElementById('day').addEventListener('change', function() {
+            let content = {
+                'day1': "Introduction to Cybersecurity, VirtualBox & Kali Linux Basics. Learn about Virtual Machines, installing Kali Linux, and basic cybersecurity principles.",
+                'day2': "Linux Essentials – Learn essential Linux commands, file system structure, and permission settings.",
+                'day3': "Networking Basics – OSI Model, TCP/UDP, Ports & Protocols explained with real-world examples.",
+                'day4': "Wireshark Basics – How to capture and analyze network traffic to find vulnerabilities.",
+                'day5': `Google Dorking & OSINT – Learn how to find sensitive information online using search engine queries.<br>
+                        <a href='https://www.youtube.com/watch?v=lESeJ3EViCo&t=117s&pp=ygVAR29vZ2xlIERvcmtpbmcgYW5kIE9TSU5UIOKAkyBGaW5kaW5nIFNlbnNpdGl2ZSBEYXRhIE9ubGluZWNyZWF0ZQ%3D%3D' target='_blank'>Video 1</a><br>
+                        <a href='https://www.youtube.com/watch?v=520omlWAgmY' target='_blank'>Video 2</a><br>
+                        <a href='https://www.bytesnipers.com/en/cybersecurity-blog/google-dorks' target='_blank'>Blog</a>`
+            };
+            let selectedDay = this.value;
+            document.getElementById('content').innerHTML = content[selectedDay] || "No content available.";
+            document.getElementById('content-container').classList.remove('hidden');
+        });
     </script>
 </body>
 </html>
